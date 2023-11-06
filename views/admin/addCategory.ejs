@@ -1,0 +1,75 @@
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-categories.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:21 GMT -->
+<%- include('../layouts/adminHeader.ejs') %>
+<body>
+    <%- include('../layouts/adminNav.ejs') %>	
+
+    <main class="main-wrap">
+        <header class="main-header navbar">
+            <div class="col-search">
+                <form class="searchform">
+                    <div class="input-group">
+                        <input list="search_terms" type="text" class="form-control" placeholder="Search term">
+                        <button class="btn btn-light bg" type="button"> <i class="material-icons md-search"></i></button>
+                    </div>
+                    <datalist id="search_terms">
+                        <option value="Products">
+                        <option value="New orders">
+                        <!-- <option value="Apple iphone">
+                        <option value="Ahmed Hassan"> -->
+                    </datalist>
+                </form>
+            </div>
+            
+        </header>
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">Categories </h2>
+                    <p>Add category</p>
+                </div>
+                <!-- <div>
+                    <input type="text" placeholder="Search Categories" class="form-control bg-white">
+                </div> -->
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form method="post" action="/admin/addCategory">
+                                <div class="mb-4">
+                                    <label for="product_name" class="form-label">Name</label>
+                                    <input type="text" placeholder="Type here" class="form-control" id="product_name" name="name"/>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label ">Description</label>
+                                    <textarea placeholder="Type here" class="form-control ellipsis-text" name="description" style=" text-overflow: ellipsis;"></textarea>
+                                </div>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary">Create category</button>
+                                </div>
+                            </form>
+                            <p style="color: red;"><%=(typeof message!=='undefined')?message:""%></p>
+
+                        </div>
+                     <!-- .col// -->
+                    </div> <!-- .row // -->
+                </div> <!-- card body .// -->
+            </div> <!-- card .// -->
+        </section> <!-- content-main end// -->
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                    document.write(new Date().getFullYear())
+                    </script> ©, Evara - HTML Ecommerce Template .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">
+                        All rights reserved
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <%- include('../layouts/adminFooter.ejs') %>

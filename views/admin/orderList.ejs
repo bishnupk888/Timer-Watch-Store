@@ -1,0 +1,240 @@
+
+<%- include('../layouts/adminHeader.ejs')%>	
+<body>
+    <%- include('../layouts/adminNav.ejs')%>	
+
+    <main class="main-wrap">
+   
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">Order List </h2>
+                </div>
+               
+            </div>
+            <div class="card mb-4">
+                <header class="card-header">
+                
+                </header> <!-- card-header end// -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="myTable" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>#ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col" class="text-end"> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% orders.forEach(function(order,index) {%>
+                                <tr>
+                                    <td></td>
+                                    <td><b><%=order.orders.name%></b></td>
+                                    <td>₹<%=order.orders.totalPrice%></td>
+                                    <!-- <td><span class="badge rounded-pill alert-success" id="status-val-<%= order.orders._id %>"><%=order.orders.orderStatus%></span></td> -->
+
+
+
+
+                                    <td>
+                                        <% if (order.orders.orderStatus == 'Placed') { %>
+                                            <div class="badge rounded-pill alert-primary"><%= order.orders.orderStatus %></div>
+                                        <% } else if (order.orders.orderStatus == 'Dispatched') { %>
+                                            <div class="badge rounded-pill alert-info"><%= order.orders.orderStatus %></div>
+                                        <% } else if (order.orders.orderStatus == 'Cancel Requested' ) { %>
+                                            <div class="badge rounded-pill alert-warning"><%= order.orders.orderStatus %></div>
+                                        <% } else if (order.orders.orderStatus == 'Delivered') { %>
+                                            <div class="badge rounded-pill alert-success"><%= order.orders.orderStatus %></div>
+                                        <% } else if (order.orders.orderStatus == 'Return Requested' ) { %>
+                                            <div class="badge rounded-pill alert-warning"><%= order.orders.orderStatus %></div>
+                                        <% } else { %>
+                                            <div class="badge rounded-pill alert-danger"><%= order.orders.orderStatus %></div>
+                                        <% } %>
+                                    </td>
+
+
+
+
+
+                                    <td><%=order.orders.createdAt.toLocaleString()%></td>
+                                    <td class="text-end">
+                                        <a href="/admin/orderDetails?id=<%=order.orders._id%>" class="btn btn-md rounded font-sm">Detail</a>
+                                        <div class="dropdown">
+                                            <a href="" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
+                                            <div class="dropdown-menu">
+                                                <%if(order.orders.orderStatus=='Placed'||order.orders.orderStatus=='Cancel Declined'){%>
+                                                <a class="dropdown-item" onclick="orderStatus('<%=order.orders._id%>','Dispatched')">Dispatched</a>
+                                                <a class="dropdown-item" onclick="cancelStatus('<%=order.orders._id%>','<%=order.user%>','Cancel Accepted')">Cancel Order</a>
+
+                                                <%}else if(order.orders.orderStatus=='Dispatched'){%>
+                                                <a class="dropdown-item" onclick="orderStatus('<%=order.orders._id%>','Delivered')">Delivered</a>
+                                                <%}else if(order.orders.orderStatus=='Cancel Requested'){%>
+                                                    <a class="dropdown-item" onclick="cancelStatus('<%=order.orders._id%>','<%=order.user%>','Cancel Accepted')"> Accept Cancel</a>
+                                                    <a class="dropdown-item" onclick="cancelStatus('<%=order.orders._id%>','<%=order.user%>','Cancel Declined')">Decline Cancel</a>
+                                                    <%}else if(order.orders.orderStatus=='Return Requested'){%>
+                                                        <a class="dropdown-item" onclick="returnOrder('<%=order.orders._id%>','<%=order.user%>','Return Accepted')"> Accept Return</a>
+                                                    <a class="dropdown-item" onclick="returnOrder('<%=order.orders._id%>','<%=order.user%>','Return Declined')">Decline Return</a>
+                                                    <%}%>
+
+                                                   
+
+
+
+
+                                            </div>
+                                        </div> <!-- dropdown //end -->
+                                    </td>
+                                </tr>
+                                <% }) %>
+
+                               
+                               
+                               
+                                
+               
+                            </tbody>
+                        </table>
+                    </div> <!-- table-responsive //end -->
+                </div> <!-- card-body end// -->
+            </div> <!-- card end// -->
+            <div class="pagination-area mt-15 mb-50">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-start">
+                        <% if (page > 1) { %>
+                        <li class="page-item active"><a class="page-link" href="/admin/orderList?page=<%= page - 1 %>&limit=<%= limit %>" >Pre</a></li>
+                        <% } %>
+                        <!-- <li class="page-item">Page <%= page %> of <%= totalPages %></li> -->
+                        <% for (let i = 1; i <= totalPages; i++) { %>
+                            <% if (i === page) { %>
+                                <li class="page-item active" ><span><%= i %> </span></li>
+                            <% } else { %>
+                              <li class="page-item active" ><a class="page-link" href="/admin/orderList?page=<%= i %>&limit=<%= limit %>"><%= i %></a></li>
+                            <% } %>
+                          <% } %>
+                        <% if (page < totalPages) { %>
+                        <li class="page-item active"><a class="page-link" href="/admin/orderList?page=<%= page + 1 %>&limit=<%= limit %>" style="width: 45px;">Next</i>
+                        </a></li>
+                        <% } %>
+                    </ul>
+                </nav>
+            </div>
+        </section> <!-- content-main end// -->
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    
+                    document.write(new Date().getFullYear())
+                    </script> ©, Evara - HTML Ecommerce Template .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">
+                        All rights reserved
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    
+   
+   
+</body>
+<script>
+  
+  
+    function orderStatus(orderId, status)
+    {
+      console.log(orderId, status);
+      $.ajax({
+        url:'/admin/orderStatus',
+        method:'put',
+        data: {
+          orderId: orderId,
+          status: status,
+      
+
+        },
+        success:(response)=>
+        {
+          if(response)
+          {
+            location.reload()
+          }
+        }
+      })
+    }
+    function cancelStatus(orderId,userId, status)
+    {
+      console.log(orderId, status,userId);
+      $.ajax({
+        url:'/admin/cancelOrder',
+        method:'put',
+        data: {
+          orderId: orderId,
+          status: status,
+          userId:userId 
+        },
+        success:(response)=>
+        {
+          if(response)
+          {
+            location.reload()
+          }
+        }
+      })
+    }
+    function returnOrder(orderId,userId, status)
+    {
+      console.log(orderId, status);
+      $.ajax({
+        url:'/admin/returnOrder',
+        method:'put',
+        data: {
+          orderId: orderId,
+          status: status,
+          userId:userId 
+        },
+        success:(response)=>
+        {
+          if(response)
+          {
+            location.reload()
+          }
+        }
+      })
+    }
+    
+   
+    
+    </script>
+    <script>
+        
+
+        $(document).ready(function() {
+  $('#myTable').DataTable({
+    "paging": false,
+    "pageLength": 10,
+    "lengthMenu": [5, 10, 20, 30, 50],
+    "language": {
+      "info": ""
+    }
+  });
+});
+    </script>
+    
+    <script src="../admin-assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="../admin-assets/js/vendors/select2.min.js"></script>
+    <script src="../admin-assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="../admin-assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <script src="../admin-assets/js/vendors/chart.js"></script>
+    <!-- Main Script -->
+    <script src="../admin-assets/js/main.js" type="text/javascript"></script>
+    <script src="../admin-assets/js/custom-chart.js" type="text/javascript"></script>
+    
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-orders-1.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:22 GMT -->
+</html>

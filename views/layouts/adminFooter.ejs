@@ -1,0 +1,32 @@
+<script src="../admin-assets/js/vendors/jquery-3.6.0.min.js"></script>
+<script src="../admin-assets/js/vendors/bootstrap.bundle.min.js"></script>
+<script src="../admin-assets/js/vendors/select2.min.js"></script>
+<script src="../admin-assets/js/vendors/perfect-scrollbar.js"></script>
+<script src="../admin-assets/js/vendors/jquery.fullscreen.min.js"></script>
+<script src="../admin-assets/js/vendors/chart.js"></script>
+<!-- Main Script -->
+<script src="../admin-assets/js/main.js" type="text/javascript"></script>
+<script src="../admin-assets/js/custom-chart.js" type="text/javascript"></script>
+<script>
+    // JavaScript code to dynamically create the offcanvas aside element if it does not exist.
+    const navBarButton = document.querySelector('.btn-mobile');
+  
+    const offcanvasAside = document.querySelector('#offcanvas_aside');
+    if (!offcanvasAside) {
+      offcanvasAside = document.createElement('aside');
+      offcanvasAside.id = 'offcanvas_aside';
+      offcanvasAside.classList.add('navbar-aside');
+  
+      document.body.appendChild(offcanvasAside);
+    }
+  
+    // Add an event listener to the nav bar button to toggle the offcanvas aside element.
+    navBarButton.addEventListener('click', () => {
+      offcanvasAside.classList.toggle('active');
+    });
+  </script>
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/dashboard.ejs by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:32:57 GMT -->
+</html>

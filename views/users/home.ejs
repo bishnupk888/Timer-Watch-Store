@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/fav.png">
+    <!-- Author Meta -->
+    <meta name="author" content="CodePixar">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>Timer Watch Shop</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../user-assets/css/linearicons.css">
+    <link rel="stylesheet" href="../user-assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../user-assets/css/themify-icons.css">
+    <link rel="stylesheet" href="../user-assets/css/bootstrap.css">
+    <link rel="stylesheet" href="../user-assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="../user-assets/css/nice-select.css">
+    <link rel="stylesheet" href="../user-assets/css/nouislider.min.css">
+    <link rel="stylesheet" href="../user-assets/css/ion.rangeSlider.css" />
+    <link rel="stylesheet" href="../user-assets/css/ion.rangeSlider.skinFlat.css" />
+    <link rel="stylesheet" href="../user-assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="../user-assets/css/main.css">
+
+   
+</head>
+<style>
+    /* Define the hover effect for the product div */
+.single-product:hover {
+  background-color: #f2f2f2; /* Change the background color on hover */
+  cursor: pointer; /* Change the cursor to a pointer on hover */
+}
+
+</style>
+<body>
+
+    <!-- Start Header Area -->
+    <%-
+    include('../layouts/header.ejs')
+    %>
+    <!-- End Header Area -->
+
+    <!-- <div class="full-width-image">
+        <img src="/public/" alt="Your Image" style="width: 100%; height: auto;">
+    </div> -->
+
+    <!-- start features Area -->
+    <section class="features-area section_gap">
+        <div class="container">
+            <div class="row features-inner">
+                <!-- single features -->
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-features">
+                        <div class="f-icon">
+                            <img src="../img/features/f-icon1.png" alt="">
+                        </div>
+                        <h6>Free Delivery</h6>
+                    </div>
+                </div>
+                <!-- single features -->
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-features">
+                        <div class="f-icon">
+                            <img src="/public/user-assets/img/features/f-icon2.png" alt="">
+                        </div>
+                        <h6>Return Policy</h6>
+                    </div>
+                </div>
+                <!-- single features -->
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-features">
+                        <div class="f-icon">
+                            <img src="img/features/f-icon3.png" alt="">
+                        </div>
+                        <h6>24/7 Support</h6>
+                    </div>
+                </div>
+                <!-- single features -->
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="single-features">
+                        <div class="f-icon">
+                            <img src="img/features/f-icon4.png" alt="">
+                        </div>
+                        <h6>Secure Payment</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end features Area -->
+    
+   
+    <div class="container text-center ">
+        <h3 style="opacity: 0.8; transition: opacity 0.1s ease-in-out; font-family: 'Poppins', sans-serif;">
+            - Famous Brands We Have - 
+        </h3>
+    </div>
+     <!-- Start brand Area -->
+     <section class="brand-area"> 
+        <div class="container section_gap">
+            <div class="row align-items-end">
+                
+                <div class="col-3 single-img"> <!-- Adjust the column width as needed -->
+                    <a href="/categoryShop?id=65084ee17eeb98fe3a8324de">
+                        <img class="img-fluid d-block mx-auto" src="../user-assets/img/brand/rolex1.png" alt="">
+                    </a>
+                </div>
+
+
+                
+                <div class="col-3 single-img"> <!-- Adjust the column width as needed -->
+                    <a href="/categoryShop?id=65084f6b7eeb98fe3a8324f7">
+                        <img class="img-fluid d-block mx-auto" src="../user-assets/img/brand/tagheuer2.png" alt="">
+                    </a>
+                </div>
+
+                
+                <div class="col-3 single-img"> <!-- Adjust the column width as needed -->
+                    <a href="/categoryShop?id=65084e487eeb98fe3a8324d5">
+                        <img class="img-fluid d-block mx-auto" src="../user-assets/img/brand/hublot3.png" alt="">
+                    </a>
+                </div>
+                
+                <div class="col-3 single-img"> <!-- Adjust the column width as needed -->
+                    <a href="/categoryShop?id=650850ea7eeb98fe3a832510">
+                        <img class="img-fluid d-block mx-auto" src="../user-assets/img/brand/omega4.png" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="lattest-product-area pb-40 category-list">
+        <div class="row">
+            <% product.forEach((item) => { %>
+            <% if (item.isListed=== true) { %>    
+            <% if (item.isProductListed=== true) { %>
+            <div class="col-lg-3 col-md-6">
+                <div class="single-product">
+                    <!-- Reduce image size and center it -->
+                    <div class="product-image">
+                        <img class="img-fluid" src="../product-images/<%= item.images[0] %>" alt="<%= item.name %>">
+                    </div>
+    
+                    <div class="product-details text-center">
+                        <small><%= item.category.name %></small>
+                        <h6 title="<%= item.name %>" class="tooltip-ellipsis"><%= item.name %></h6>
+    
+                        <!-- Center-align the price section -->
+                        <div class="price">
+                            <h6><i class="fa fa-inr" aria-hidden="true"></i> <%= item.price %></h6>
+                        </div>
+    
+                        <div class="prd-bottom text-center">
+                            <!-- <a onclick="addtocart('<%= item._id %>')" class="social-info">
+                                <span class="ti-bag"></span>
+                                <p class="hover-text">Add to Bag</p>
+                            </a>
+                            <a onclick="addToWishList('<%= item._id %>')" class="social-info">
+                                <span class="lnr lnr-heart"></span>
+                                <p class="hover-text">Wishlist</p>
+                            </a> -->
+                            <a href="/productPage?id=<%= item._id %>" class="social-info">
+                                <span class="lnr lnr-move"></span>
+                                <p class="hover-text">View More</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+            <% } %>
+            <% }) %>
+        </div>
+    </section>
+    
+    
+    
+   
+
+   
+    
+
+    <!-- End brand Area -->
+
+    <!-- start footer Area -->
+    <%-
+    include('../layouts/footer.ejs')
+    %>
+    <!-- End footer Area -->
+
+    <script src="../user-assets/js/vendor/jquery-2.2.4.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+    <script src="../user-assets/js/vendor/bootstrap.min.js"></script>
+    <script src="../user-assets/js/jquery.ajaxchimp.min.js"></script>
+    <script src="../user-assets/js/jquery.nice-select.min.js"></script>
+    <script src="../user-assets/js/jquery.sticky.js"></script>
+    <script src="../user-assets/js/nouislider.min.js"></script>
+    
+    <script src="../user-assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="../user-assets/js/owl.carousel.min.js"></script>
+    <!-- gmaps Js -->
+
+    
+    <script src="../user-assets/js/main.js"></script>
+</body>
+
+</html>
+

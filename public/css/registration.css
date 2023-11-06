@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
+  
+  .registration-form {
+    margin-top: 20px;
+    font-family: 'Oswald', sans-serif
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: inline-block;
+    width: 120px;
+  }
+  
+  .form-group input {
+    width: 300px;
+    padding: 5px;
+  }
+  
+  .submit-button {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    display: block;
+    margin-top: 15px;
+  }
+  
+  h1{
+    font-family: 'Oswald', sans-serif
+  }

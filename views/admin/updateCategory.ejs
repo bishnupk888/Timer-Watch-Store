@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-categories.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:21 GMT -->
+<head>
+    <meta charset="utf-8">
+    <title>Timer Watch Shop</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../admin-assets/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link href="../admin-assets/css/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <%- include('../layouts/adminNav.ejs') %>	
+
+    <main class="main-wrap">
+     
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">Categories </h2>
+                    <p>Add category</p>
+                </div>
+                <div>
+                    <input type="text" placeholder="Search Categories" class="form-control bg-white">
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form method="post" action="/admin/editCategory" id="myform">
+                                <div class="mb-4">
+                                    <label for="product_name" class="form-label">Name</label>
+                                    <input type="text" placeholder="Type here" class="form-control" id="name" name="category" onkeyup="titleValidation()"  value="<%=category.name%>"/>
+                                </div>
+                                <span id="title-error"></span>
+                                <div class="mb-4">
+                                    <label class="form-label ">Description</label>
+                                    <textarea placeholder="Type here" class="form-control ellipsis-text" name="description" style=" text-overflow: ellipsis;" onkeyup="descriptionValidation()" id="description" ><%=category.description%></textarea>
+                                </div>
+                                <span id="description-error"></span>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary">Create category</button>
+                                </div>
+                                <input type="hidden" name="id" value="<%=category._id%>">
+                            </form>
+                            <p style="color: red;"><%=(typeof message!=='undefined')?message:""%></p>
+
+                        </div>
+                     <!-- .col// -->
+                    </div> <!-- .row // -->
+                </div> <!-- card body .// -->
+            </div> <!-- card .// -->
+        </section> <!-- content-main end// -->
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                    document.write(new Date().getFullYear())
+                    </script> ©, Evara - HTML Ecommerce Template .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">
+                        All rights reserved
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="../admin-assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="../admin-assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="../admin-assets/js/vendors/select2.min.js"></script>
+    <script src="../admin-assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="../admin-assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <!-- Main Script -->
+    <script src="../admin-assets/js/main.js" type="text/javascript"></script>
+
+
+    <script>
+        const regex = /^(?!\s*$).+/; //to check input empty
+      
+        const titleError = document.getElementById("title-error");
+        const descriptionError = document.getElementById("description-error");
+    
+        const myform = document.getElementById("myform");
+      
+        function titleValidation() {
+          const name = document.getElementById("name").value;
+          const nameInput = document.getElementById("name");
+          if (name.length == 0) {
+            titleError.innerHTML = "Title is required";
+            titleError.style.color = "red";
+            nameInput.style.border = "solid 2px red";
+            return false;
+          }
+          if (!name.match(regex)) {
+            titleError.innerHTML = "Write valid Title";
+            titleError.style.color = "red";
+            nameInput.style.border = "solid 2px red";
+            return false;
+          }
+          titleError.innerHTML = "";
+          titleError.style.color = "green";
+          nameInput.style.border = "solid 2px green";
+          return true;
+        }
+      
+        function descriptionValidation() {
+          const name = document.getElementById("description").value;
+          const nameInput = document.getElementById("description");
+          if (name.length == 0) {
+            descriptionError.innerHTML = "Description is required";
+            descriptionError.style.color = "red";
+            nameInput.style.border = "solid 2px red";
+            return false;
+          }
+          if (!name.match(regex)) {
+            descriptionError.innerHTML = "Write valid Description";
+            descriptionError.style.color = "red";
+            nameInput.style.border = "solid 2px red";
+            return false;
+          }
+          descriptionError.innerHTML = "";
+          descriptionError.style.color = "green";
+          nameInput.style.border = "solid 2px green";
+          return true;
+        }
+      
+        myform.addEventListener("submit", (event) => {
+          event.preventDefault();
+          if (!titleValidation() || !descriptionValidation()) {
+            return false;
+          } else {
+            myform.submit();
+          }
+        });
+      </script>
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-categories.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:21 GMT -->
+</html>

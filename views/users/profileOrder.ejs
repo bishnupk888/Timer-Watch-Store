@@ -1,0 +1,248 @@
+<%-include('../layouts/profileHeader.ejs')%>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+</head>
+
+
+<section class="user-dashboard page-wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="list-inline dashboard-menu text-center">
+					<li><a href="/dashboard">Dashboard</a></li>
+					<li><a class="active" href="/profileOrderList">Orders</a></li>
+					<li><a href="/profileAddress">Address</a></li>
+					<li><a href="/profileDetails">Profile Details</a></li>
+          <li><a href="/wallet">Transactions</a></li>
+
+				</ul>
+				<div class="dashboard-wrapper user-dashboard">
+					<div class="table-responsive">
+						<table class="table" id="myTable">
+							<thead>
+								<tr>
+									<th>Order No</th>
+									<th>Date</th>
+									
+									<th>Total Price</th>
+									<th>Status</th>
+                                    <th>View</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+						
+							<tbody>
+                                <% orders.forEach((order, index) => { %>
+                                    <tr>
+                                        <td><%= index + 1 %></td>
+                                        <td><%= order.orders.createdAt.toLocaleString() %></td>
+                                        <td>₹ <%= order.orders.totalPrice %></td>
+                                        <td>
+                                            <% if (order.orders.orderStatus === 'Placed') { %>
+                                                <span class="label label-primary" style="background-color: rgb(22, 139, 255);">Placed</span>
+                                            <% } else if (order.orders.orderStatus === 'Delivered') { %>
+                                                <span class="label label-primary" style="background-color: rgb(0, 150, 5);">Delivered</span>
+                                            <% } else if (order.orders.orderStatus === 'Cancel Requested') { %>
+                                                <span class="label label-primary" style="background-color: orange;">Cancel Requested</span>
+                                            <% } else if (order.orders.orderStatus === 'Order Cancelled') { %>
+                                                <span class="label label-primary" style="background-color: red;">Order Cancelled</span>
+                                            <% } else if (order.orders.orderStatus === 'Dispatched') { %>
+                                                <span class="label label-primary" style="background-color: purple;">Dispatched</span>
+                                            <% } else if (order.orders.orderStatus === 'Return Requested') { %>
+                                                <span class="label label-primary" style="background-color: rgb(18, 14, 69);">Return Requested</span>
+                                            <% } else if (order.orders.orderStatus === 'Return Accepted') { %>
+                                                <span class="label label-primary" style="background-color: rgb(10, 173, 173);">Return Accepted</span>
+                                            <% } else if (order.orders.orderStatus === 'Cancel Accepted') { %>
+                                                <span class="label label-primary" style="background-color: rgb(2, 247, 255);">Cancel Accepted</span>
+                                            <% } %>
+                                        </td>
+                                        <td><a href="/orderDetails?id=<%=order.orders._id%>" class="btn btn-default">View</a></td>
+                                        <% if (order.orders.orderStatus === 'Placed') { %>
+                                            <td><a href="#" onclick="cancelOrder('<%= order.orders._id %>', 'Cancel Requested'); return false;"><i class="fas fa-times"></i> Cancel</a></td>
+                                        <% } else if (order.orders.orderStatus === 'Delivered') { %>
+                                            <td><a href="#" onclick="cancelOrder('<%= order.orders._id %>', 'Return Requested'); return false;"><i class="fas fa-reply"></i> Return</a></td>
+                                        <% } else { %>
+                                            <td>....</td>
+                                            
+                                        <% } %>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                            
+                        
+                            
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<footer class="footer section text-center">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="social-media">
+					<li>
+						<a href="https://www.facebook.com/themefisher">
+							<i class="tf-ion-social-facebook"></i>
+						</a>
+					</li>
+					<li>
+						<a href="https://www.instagram.com/themefisher">
+							<i class="tf-ion-social-instagram"></i>
+						</a>
+					</li>
+					<li>
+						<a href="https://www.twitter.com/themefisher">
+							<i class="tf-ion-social-twitter"></i>
+						</a>
+					</li>
+					<li>
+						<a href="https://www.pinterest.com/themefisher/">
+							<i class="tf-ion-social-pinterest"></i>
+						</a>
+					</li>
+				</ul>
+				<ul class="footer-menu text-uppercase">
+					<li>
+						<a href="contact.html">CONTACT</a>
+					</li>
+					<li>
+						<a href="shop.html">SHOP</a>
+					</li>
+					<li>
+						<a href="pricing.html">Pricing</a>
+					</li>
+					<li>
+						<a href="contact.html">PRIVACY POLICY</a>
+					</li>
+				</ul>
+				<p class="copyright-text">Copyright &copy;2021, Designed &amp; Developed by <a href="https://themefisher.com/">Themefisher</a></p>
+			</div>
+		</div>
+	</div>
+</footer>
+<script>
+  $(document).ready(function() {
+    $.noConflict();
+    $('#myTable').DataTable({
+      "paging": true,          // Enable pagination
+      "pageLength": 10,        // Number of rows per page
+      "lengthMenu": [10, 25, 50, 75, 100],  // Dropdown options for rows per page
+
+    });
+  });
+  </script>
+<script>
+    function deleteProduct(cartId, proId,quantity) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!", 
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+      timer: 3000
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: '/delete-product-cart',
+          method: 'DELETE',
+          data: {
+            cartId: cartId,
+            proId: proId,
+            quantity,quantity
+          },
+          success: (response) => {
+            if (response.status) {
+              location.reload()
+            }
+          }
+        })
+      }
+    })
+
+  }
+</script>
+
+
+    <!-- 
+    Essential Scripts
+    =====================================-->
+    
+    <!-- Main jQuery -->
+    <script src="plugins/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.1 -->
+    <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Touchpin -->
+    <script src="plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+    <!-- Instagram Feed Js -->
+    <script src="plugins/instafeed/instafeed.min.js"></script>
+    <!-- Video Lightbox Plugin -->
+    <script src="plugins/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
+    <!-- Count Down Js -->
+    <script src="plugins/syo-timer/build/jquery.syotimer.min.js"></script>
+
+    <!-- slick Carousel -->
+    <script src="plugins/slick/slick.min.js"></script>
+    <script src="plugins/slick/slick-animation.min.js"></script>
+
+    <!-- Google Mapl -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+    <script type="text/javascript" src="plugins/google-map/gmap.js"></script>
+
+    <!-- Main Js File -->
+    <script src="js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+    <script>
+        function cancelOrder(orderId, status) {
+            Swal.fire({
+          title: 'Are you sure to cancel',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, Cancel it!',
+          timer: 5000,
+          customClass: {
+          container: 'swal-wide', // Custom CSS class for the container
+            },
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+                url: '/cancelOrder',
+                method: 'put',
+                data: {
+                    orderId: orderId,
+                    status: status
+                },
+                success: (response) => {
+                    if (response) {
+                        location.reload()
+                    }
+                   
+                }
+            });
+          }
+          
+        })
+    }
+    </script>
+
+   
+
+
+
+
+  </body>
+  </html>

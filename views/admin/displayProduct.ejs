@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-products-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:00 GMT -->
+<head>
+    <meta charset="utf-8">
+    <title>Timer Watch Shop</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../admin-assets/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link href="../admin-assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+     <!-- pagination -->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <!-- main script -->
+    <script src="../admin-assets/js/main.js" type="text/javascript"></script>
+
+
+    
+</head>
+
+
+<style>
+    .tooltip-ellipsis {
+  max-width: 200px; /* Adjust the maximum width as needed */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  position: relative;
+  cursor: help;
+}
+
+.tooltip-ellipsis::after {
+  content: attr(title);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+}
+
+.tooltip-ellipsis:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+</style>
+
+
+<body>
+    <%- include('../layouts/adminNav.ejs') %>	
+    <main class="main-wrap">
+    
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">Products List</h2>
+                
+                </div>
+                <div>
+            
+                    <a href="/admin/product" class="btn btn-primary btn-sm rounded">Create new</a>
+                </div>
+            </div>
+        
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="myTable" class="table table-hover" >
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th class="text-end"> Action </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <% product.forEach((item) => { %>            
+                            <tr>
+                                <td width="30%">
+                                    <a href="#" class="itemside">
+                                        <div class="info pl-3">
+                                            <h6 class="mb-0 title"><img src="../product-images/<%= item.images[0]%>" width="50px" height="50px" class="img-sm img-thumbnail" alt="Item"></h6>
+                          
+                                        </div>
+                                        <h6 class="mb-0 tooltip-ellipsis" title="<%= item.name %>"><%= item.name %></h6>
+
+                                    </a>
+                                </td>
+                                <td width="10%"><i class="fa fa-inr" aria-hidden="true"></i>
+                                    <%= item.price %></td>
+                                    <td><%= item.stock %></td>
+                                <td title="<%= item.description %>" class="tooltip-ellipsis"><%= item.description %></td>
+                                <%if(item.isProductListed==true && item.isListed == true  ){%>
+                                  <td><span class="badge rounded-pill alert-success">Active</span></td>
+                                <% } else { %> 
+                                  <td><span class="badge rounded-pill alert-warning">Unlisted</span></td>
+                                <% } %>
+                                <td>
+                                    <div class="dropdown col-lg-2 col-sm-2 col-4 col-action text-start">
+                                      <a href="#" data-bs-toggle="dropdown" class="btn btn-light rounded btn-sm font-sm"> <i class="material-icons md-more_horiz"></i> </a>
+                                      <div class="dropdown-menu text-end">
+                                          <a class="dropdown-item" href="/admin/updateProduct?id=<%= item._id %>">Edit</a>
+                                          <%if(item.isProductListed==true && item.isListed == true){%>
+                                              <a class="dropdown-item text-danger" href="/admin/unListProduct?id=<%= item._id %>">Un List</a>
+                                            <% } else { %>
+                                              <a class="dropdown-item" href="/admin/reListProduct?id=<%= item._id %>">Re List</a>
+                                              <% } %>
+  
+                                      </div>
+                                  </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table> <!-- table-responsive.// -->
+                </div>
+            </div> <!-- card-body end// -->
+        </div> 
+        
+   
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                  
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+        </footer>
+
+    </main>
+   
+    
+    
+    <script src="../admin-assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="../admin-assets/js/vendors/select2.min.js"></script>
+    <script src="../admin-assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="../admin-assets/js/vendors/jquery.fullscreen.min.js"></script>
+    
+    <!-- Main Script -->
+    <script src="../admin-assets/js/main.js" type="text/javascript"></script>
+    <script src="../admin-assets/js/custom-chart.js" type="text/javascript"></script>
+   
+
+    <script>
+
+      $(document).ready(function() {
+  $('#myTable').DataTable({
+    "paging": true,
+    "pageLength": 10,
+    "lengthMenu": [5, 10, 20, 30, 50]
+  });
+});
+
+    </script>
+</body>
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-products-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:12 GMT -->
+</html>

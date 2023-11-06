@@ -1,0 +1,32 @@
+{
+  "name": "first-project",
+  "version": "1.0.0",
+  "description": "an ecommerce website ...",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.3.1",
+    "easyinvoice": "^3.0.24",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.5.1",
+    "multer": "^1.4.5-lts.1",
+    "nocache": "^4.0.0",
+    "nodemon": "^3.0.1",
+    "otp-generator": "^4.0.1",
+    "razorpay": "^2.9.2",
+    "twilio": "^4.15.0",
+    "voucher-code-generator": "^1.3.0"
+  }
+}

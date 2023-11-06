@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="img/fav.png">
+	<!-- Author Meta -->
+	<meta name="author" content="CodePixar">
+	<!-- Meta Description -->
+	<meta name="description" content="">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>Timer WatchS Shop</title>
+	<!--
+			CSS
+			============================================= -->
+	<link rel="stylesheet" href="../user-assets/css/linearicons.css">
+	<link rel="stylesheet" href="../user-assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../user-assets/css/themify-icons.css">
+	<link rel="stylesheet" href="../user-assets/css/bootstrap.css">
+	<link rel="stylesheet" href="../user-assets/css/owl.carousel.css">
+	<link rel="stylesheet" href="../user-assets/css/nice-select.css">
+	<link rel="stylesheet" href="../user-assets/css/nouislider.min.css">
+	<link rel="stylesheet" href="../user-assets/css/ion.rangeSlider.css" />
+	<link rel="stylesheet" href="../user-assets/css/ion.rangeSlider.skinFlat.css" />
+	<link rel="stylesheet" href="../user-assets/css/main.css">
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/elevatezoom/2.2.3/jquery.elevatezoom.js"></script>
+
+
+</head>
+<style>
+	/* Keep your existing CSS styles */
+	.img_zoom_container {
+	  position: relative;
+	  overflow: hidden;
+	  cursor: zoom-in;
+	}
+  
+	.img_zoom {
+	  transition: transform 0.9s ease-in-out;
+	  transform-origin: center center;
+	}
+  
+	/* Remove the background-image style from figure.zoom */
+	figure.zoom {
+	  background-position: 50% 50%;
+	  position: relative;
+	  margin: 10px auto;
+	  border: 5px solid white;
+	  box-shadow: -1px 5px 15px black;
+	  height: 500px;
+	  width: 500px;
+	  overflow: hidden;
+	  cursor: zoom-in;
+	}
+  
+	/* Add a rule to hide the img inside the figure */
+	figure.zoom img {
+	  display: none;
+	}
+	 .img_zoom_container {
+	  position: relative;
+	  overflow: hidden;
+	  cursor: zoom-in;
+	}
+  
+	.img_zoom {
+	  transition: transform 0.9s ease-in-out;
+	  transform-origin: center center;
+	}
+
+	.other-img {
+
+    display: flex;
+    align-items: center;
+	padding-left: 30px;
+	padding-top: 20px;
+	padding-bottom:20px ;
+}
+
+.other-img img {
+    width: 75px;
+    height: 75px;
+    border: 1px solid black; /* Add a black border */
+    margin-right: 20px; /* Add some spacing between images */
+    cursor: pointer; /* Add cursor style to indicate clickability */
+}
+
+.other-img img:hover {
+    border: 2px solid orange; /* Change border color to orange on hover */
+}
+
+  </style>
+
+<body>
+
+	<!-- Start Header Area -->
+    <%- include('../layouts/header.ejs') %>	
+
+	<!-- End Header Area -->
+
+	<!-- Start Banner Area -->
+
+	<!-- End Banner Area -->
+
+	
+
+	<!--================Single Product Area =================-->
+
+	<div class="product_image_area">
+		<div class="container">
+			<div class="row s_product_inner">
+				<div class="col-lg-6">
+					
+					<div class="s_Product_carousel">
+						
+						<div class="single-prd-item img_zoom_container"  >
+							<figure class="zoom" onmousemove="zoom(event)" onmouseout="resetZoom(event)">
+							<img class="img-fluid" src="../product-images/<%= product.images[0]%>" alt="">
+						</figure>
+
+						</div>
+						<div class="single-prd-item">
+							<figure class="zoom" onmousemove="zoom(event)" onmouseout="resetZoom(event)">
+							<img class="img-fluid" src="../product-images/<%= product.images[1]%>" alt="">
+						</figure>
+
+						</div>
+						<div class="single-prd-item">
+							<figure class="zoom" onmousemove="zoom(event)" onmouseout="resetZoom(event)">
+							<img class="img-fluid" src="../product-images/<%= product.images[2]%>" alt="">
+						</figure>
+
+						</div>
+					</div>
+					<div class="other-img">
+						<img class="img-fluid" src="../product-images/<%= product.images[1] %>" alt="" onclick="changeMainImage('../product-images/<%= product.images[1] %>');">
+						<img class="img-fluid" src="../product-images/<%= product.images[2] %>" alt="" onclick="changeMainImage('../product-images/<%= product.images[2] %>');">
+						<!-- Add more small images with their respective 'onclick' functions -->
+					</div>
+					
+				</div>
+				<div class="col-lg-5 offset-lg-1">
+					<div class="s_product_text">
+						<h3><%=product.name%></h3>
+						<h2><i class="fa fa-inr" aria-hidden="true"></i> <%=product.price%></h2>
+						<ul class="list">
+							<li><a class= href="#"><span>Category</span> :<%=product.category.name.toUpperCase()%></a></li>
+							<% if (product.stock <= 0) { %>
+								<li><a href="#"><span>Availability</span><span style="color: red; font-weight: bolder;">: Out of Stock</span></a></li>
+							  <% } else if (product.stock <= 5) { %>
+								<li><a href="#"><span>Availability</span>: In Stock</a></li>
+								<span style="color: red;">Hurry,Only <%= product.stock %>   items Remaining</span>
+							  <% } else { %>
+								<li><a href="#"><span>Availability</span>: In Stock</a></li>
+							  <% } %>
+							  
+
+
+
+						</ul>
+						<p><%=product.description%></p>
+						
+						<div class="card_area d-flex align-items-center">
+							<button class="primary-btn" onclick="addtocart('<%=product._id%>')">Add to Cart</button>
+							<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart" onclick="addToWishList('<%=product._id%>')"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--================End Single Product Area =================-->
+
+	<!--================Product Description Area =================-->
+	
+
+
+
+	<!--================End Product Description Area =================-->
+
+	<!-- Start related-product Area -->
+
+	<!-- End related-product Area -->
+
+	<!-- start footer Area -->
+	<%- include('../layouts/footer.ejs') %>	
+
+	<!-- End footer Area -->
+
+	
+	  
+
+
+	
+	<script>
+
+function changeMainImage(imageSrc) {
+        var mainImage = document.getElementById("single-prd-item");
+        mainImage.src = imageSrc;
+
+        // Additional code to update the carousel, if applicable
+        // Add logic to update the carousel based on the clicked image
+    }
+
+		function addToWishList(proId) {
+			event.preventDefault();
+		$.ajax({
+		  url: '/add-to-wishlist',
+		  method: 'POST',
+		  data: {
+			proId: proId
+		  },
+		  success: (response) => {
+			if (response) {
+			  // Product added to Wishlist successfully
+			  Swal.fire({
+				position: 'centre',
+				icon: 'success',
+				title: 'Product added to wish list',
+				showConfirmButton: false,
+				timer: 1500
+				})
+			  
+	
+			} else {
+			  // Error adding product to Wishlist
+			  Swal.fire({
+				icon: 'error',
+				title: 'Product already exist in Wishlist',
+				timer: 2000
+			  });
+	
+			}
+		  }
+		})
+	  }
+	
+	
+	
+	</script>
+
+	<script src="../user-assets/js/vendor/jquery-2.2.4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+	 crossorigin="anonymous"></script>
+	<script src="../user-assets/js/vendor/bootstrap.min.js"></script>
+	<script src="../user-assets/js/jquery.ajaxchimp.min.js"></script>
+	<script src="../user-assets/js/jquery.nice-select.min.js"></script>
+	<script src="../user-assets/js/jquery.sticky.js"></script>
+	<script src="../user-assets/js/nouislider.min.js"></script>
+	<script src="../user-assets/js/jquery.magnific-popup.min.js"></script>
+	<script src="../user-assets/js/owl.carousel.min.js"></script>
+	<!--gmaps Js-->
+	<script src="../user-assets/https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+	<script src="../user-assets/js/gmaps.min.js"></script>
+
+	<script src="../user-assets/js/main.js"></script>
+	<script>
+		function addtocart(proId) {
+		  $.ajax({
+			url: '/addToCart/' + proId,
+			method: 'POST',
+			success: (response) => {
+			  if (response.status==true) {
+				Swal.fire({
+				  title: 'Added To Cart',
+				  text: 'Your Product has been added to Cart',
+				  icon: 'success',
+				  timer: 5000
+				})
+				
+			  }else if(response.status=='outOfStock'){
+				Swal.fire({
+				  title: 'Out of Stock',
+				  text: 'Product Out Of Stock',
+				  icon: 'error',
+				  timer: 5000
+				})
+			  }
+			}
+		  })
+		}
+	</script>
+
+<script>
+	function zoom(event) {
+	  var zoomer = event.currentTarget;
+	  var offsetX = event.offsetX ? event.offsetX : event.touches[0].pageX;
+	  var offsetY = event.offsetY ? event.offsetY : event.touches[0].pageY;
+	  var x = (offsetX / zoomer.offsetWidth) * 100;
+	  var y = (offsetY / zoomer.offsetHeight) * 100;
+	  zoomer.querySelector('img').style.transform = 'scale(1.3)';
+	  zoomer.querySelector('img').style.transformOrigin = x + '% ' + y + '%';
+	}
+  
+	function resetZoom(event) {
+	  var zoomer = event.currentTarget;
+	  zoomer.querySelector('img').style.transform = 'none';
+    }
+  </script>
+</body>
+
+</html>

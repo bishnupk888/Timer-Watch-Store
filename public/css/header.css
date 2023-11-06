@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
+
+header {
+    background-color: black;
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    max-height: 70px;
+  }
+  
+  .logo img {
+    height: 40px;
+  }
+  
+  .nav-menu ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .nav-menu ul li {
+    margin-right: 10px;
+  }
+  
+  .nav-menu ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .search-bar input[type="text"] {
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+  .search-bar button {
+    padding: 5px 10px;
+    font-size: 16px;
+  }
+  
+  .account button {
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    color: white;
+  }
+
+  .logo img {
+    height: 100px;
+  }
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  /* .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  } */
+  
+  /* h1 {
+    text-align: center;
+  
+  } */
+  
+  .form-box {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .logo {
+      flex: 1 1 auto;
+      text-align: left;
+    }
+  
+    .nav-menu {
+      flex: 1 1 auto;
+      text-align: center;
+      margin-top: 0;
+    }
+  
+    .search-bar {
+      flex: 1 1 auto;
+      text-align: right;
+      margin-top: 0;
+    }
+  }

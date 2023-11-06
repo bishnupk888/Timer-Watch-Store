@@ -1,0 +1,74 @@
+<%-include('../layouts/profileHeader.ejs')%>
+
+
+
+
+<section class="user-dashboard page-wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="list-inline dashboard-menu text-center">
+					<li><a class="active" href="/dashboard">Dashboard</a></li>
+					<li><a href="/profileOrderList">Orders</a></li>
+					<li><a href="/ProfileAddress">Address</a></li>
+					<li><a href="/profileDetails">Profile Details</a></li>
+          <li><a href="/wallet">Transactions</a></li>
+
+				</ul>
+				<div class="dashboard-wrapper user-dashboard">
+					<div class="media">
+						<div class="pull-left">
+							<img  class="media-object user-img" src="../theme/images/profile.jpg" alt="Image">
+						</div>
+						<div class="media-body">
+							<h2 class="media-heading">Welcome <%=user.fname%> <%=user.lname%>!</h2>
+							<p style="line-height: 30px;">
+                                </p>
+						</div>
+					</div>
+					<div class="total-order mt-20">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+
+    <!-- 
+    Essential Scripts
+    =====================================-->
+    
+    <!-- Main jQuery -->
+    <script src="../theme/plugins/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.1 -->
+    <script src="../theme/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Touchpin -->
+    <script src="../theme/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+    <!-- Instagram Feed Js -->
+    <script src="../theme/plugins/instafeed/instafeed.min.js"></script>
+    <!-- Video Lightbox Plugin -->
+    <script src="../theme/plugins/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
+    <!-- Count Down Js -->
+    <script src="../theme/plugins/syo-timer/build/jquery.syotimer.min.js"></script>
+
+    <!-- slick Carousel -->
+    <script src="../theme/plugins/slick/slick.min.js"></script>
+    <script src="../theme/plugins/slick/slick-animation.min.js"></script>
+
+    <!-- Google Mapl -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+    <script type="text/javascript" src="../theme/plugins/google-map/gmap.js"></script>
+
+    <!-- Main Js File -->
+    <script src="../theme/js/script.js"></script>
+
+    
+    
+
+
+  </body>
+  </html>

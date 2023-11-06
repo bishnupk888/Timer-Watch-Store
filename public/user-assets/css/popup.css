@@ -1,0 +1,228 @@
+        /* popup------------------------------------------------- */
+        .overlay-pop-up{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            opacity: 0.5;
+            z-index: 99;
+        }
+        .pop-up-button{
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 35px;
+            outline: none;
+            border: none;
+            background-color: #e47312;
+            transition: all 300ms ease;
+            color: #fff;
+            font-size: 22px;
+            font-weight: 100;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        .pop-up-list{
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 500px;
+            height: 100%;
+            z-index: 10000;
+            padding: 95px 50px 35px 70px;
+            background-color: #fff;
+            color: black;
+            transition: all 0.2s ease-out;
+            display: none;
+        }
+  
+        .list-wrapper{
+            margin-top: 80px;
+        }
+       
+        /* popup ends------------------------------ */
+  
+        .info-wrapper:hover{
+            background-color: #e98a38;
+            color: white;
+        }
+  
+        .button{
+            margin-top: 0x;
+            min-width: 160px;
+            padding: 15px 25px;
+            transition: all 300ms ease;
+            color: #fff;
+            font-weight: 500;
+            text-align:center;
+            letter-spacing: 1px;
+            background-color: #e47312;
+            border: 0;
+            cursor: pointer;
+        }
+        .button:hover{
+            background-color: #e98a38;
+        }
+        .change{
+  
+            padding: 10px 20px;
+            transition: all 300ms ease;
+            color: #fff;
+            font-weight: 500;
+            text-align:center;
+            letter-spacing: 1px;
+            background-color: #e47312;
+            border: 0;
+            cursor: pointer;
+        }
+        .change:hover{
+            background-color: #e98a38;
+        }
+  
+  
+          .top-title-section{
+          box-sizing: border-box;
+          width: 100%;
+          height: 60px;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          }
+          .top-title.special{
+          z-index: 2;
+          position: relative;
+          color: black;
+          margin: 0;
+          font-size: 40px;
+          line-height: 50px;
+          letter-spacing: 1px;
+          font-weight: 600;
+          }
+  
+  
+          body.no-scroll {
+              overflow-y: hidden;
+          }
+  
+  
+          #btn {
+  
+              min-width: 160px;
+              padding: 14px 25px;
+              transition: all 300ms ease;
+              color: #fff;
+              font-weight: 500;
+              text-align: center;
+              letter-spacing: 1px;
+              background-color: #e47312;
+              border: 0;
+              cursor: pointer;
+          }
+  
+          #btn:hover {
+              background-color: #e98a38;
+          }
+  
+          .popup-wrapper {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(2, 2, 2, 0.685);
+              z-index: 9998;
+              opacity: 0;
+              pointer-events: none;
+              padding: 10px 20px;
+              transition: opacity 0.3s ease-in-out;
+              text-align: center;
+          }
+  
+          .popup-wrapper.active {
+              opacity: 1;
+              pointer-events: all;
+          }
+  
+          .popup {
+              padding: 20px 25px;
+              max-width: 500px;
+              width: 100%;
+              position: fixed;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              background-color: #12192c;
+              border-radius: 15px;
+          }
+  
+          .popup-form {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+          }
+  
+          .close-button {
+              position: absolute;
+              margin-right: 10px;
+              top: -30;
+              right: 0;
+              background: none;
+              border: none;
+              padding: 0;
+              border: 0;
+              width: 25px;
+              height: 45px;
+              outline: none;
+              cursor: pointer;
+              display: inline-block;
+              transition: transform 0.3s, opacity 0.3s;
+              -webkit-transition: transform 0.3s, opacity 0.3s;
+              -moz-transition: transform 0.3s, opacity 0.3s;
+              -ms-transition: transform 0.3s, opacity 0.3s;
+              -o-transition: transform 0.3s, opacity 0.3s;
+          }
+  
+          .close-button:before,
+          .close-button:after {
+              content: "";
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 2px;
+              height: 30px;
+              background-color: #fff;
+              border-radius: 1.5px;
+              transform: translateY(-50%);
+          }
+  
+          .close-button:before {
+              transform: translateY(-50%) rotate(45deg);
+          }
+  
+          .close-button:after {
+              transform: translateY(-50%) rotate(-45deg);
+          }
+  
+          .close-button:hover {
+              transform: scale(1.1);
+          }
+  
+          .close-button:active {
+              opacity: 0.8;
+              transform: scale(0.9);
+          }
+          .popup-form__input {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 12px 20px;
+            width: 90%;
+        }
+        
+  
+          

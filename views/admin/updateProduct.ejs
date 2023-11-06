@@ -1,0 +1,280 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-form-product-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:32 GMT -->
+<head>
+    <meta charset="utf-8">
+    <title>Timer Watch shop</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="../admin-assets/imgs/theme/favicon.svg">
+    <!-- Template CSS -->
+    <link href="../admin-assets/css/main.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <%- include('../layouts/adminNav.ejs') %>	
+
+    <main class="main-wrap">
+   
+        <form action="/admin/updateProduct" id="myForm" method="post" enctype="multipart/form-data">
+        <section class="content-main">
+        
+            <div class="row">
+                <div class="col-6">
+                    <div class="content-header">
+                        <h2 class="content-title">Update Product</h2>
+                        <div>
+                            <input class="btn btn-md rounded font-sm hover-up" value="Publish" type="submit"></input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- <div class="col-md-3">
+                                    <h6>1. General info</h6>
+                                </div> -->
+                                <div class="col-md-9">
+
+                                    <div class="mb-4">
+                                        <label class="form-label">Product title</label>
+                                        <input type="text" placeholder="Type here" class="form-control" name="name" value="<%=product.name%>" id="name" onkeyup="nameValidation()">
+                                        <span id="nameError"></span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Description</label>
+                                        <textarea placeholder="Type here" class="form-control" rows="4" name="description" id="description" onkeyup="descriptionValidation()"><%=product.description%></textarea>
+                                        <span id="descriptionError"></span>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Category</label>
+                                        
+                                        <select class="form-select" name="category">
+                                            <option value="<%= product.category._id%>"><%= product.category.name %></option>
+                                            <% category.forEach(function(category) { %>
+                                            <% if (category.name !== product.category.name) { %>
+                                            <option value="<%= category._id %>"><%= category.name %></option>
+                                            <% } %>
+                                            <% }); %>
+                                        </select>
+                                    </div>
+                                </div> <!-- col.// -->
+                            </div> <!-- row.// -->
+                            <hr class="mb-4 mt-0">
+                            <div class="row">
+                                <!-- <div class="col-md-3">
+                                    <h6>2. Pricing</h6>
+                                </div> -->
+                                <div class="col-md-9">
+                                    <div class="mb-4">
+                                        <label class="form-label">Cost in INR</label>
+                                        <input type="number" placeholder="00.0" class="form-control" name="price" value="<%=product.price%>" id="price" onkeyup="priceValidation()">
+                                        <span id="priceError"></span>
+                                    </div>
+                                </div> 
+                                <div class="mb-4">
+                                    <label class="form-label">Stock</label>
+                                    <input type="number" placeholder="0" class="form-control" name="stock" value="<%=product.stock%>" id="stock" onkeyup="stockValidation()" style="width: 380px;">
+                                    <span id="stockError"></span>
+                                </div><!-- col.// -->
+                            </div> <!-- row.// -->
+                            
+                            <hr class="mb-4 mt-0">
+                            <div class="row">
+                                
+                                <div class="col-md-12">
+                                    <div class="col-md-4">
+                                    <div class="product-image">
+                                        <img class="img-fluid" src="../product-images/<%= product.images[0] %>" alt="<%= product.name %>">
+                                    </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Main Image</label>
+                                        <input class="form-control" type="file" name="images">
+                                    </div>
+                                </div>
+                              
+                                
+                                <div class="col-md-12">
+                                    <div class="col-md-4">
+                                    <div class="product-image">
+                                        <img class="img-fluid" src="../product-images/<%= product.images[1] %>" alt="<%= product.name %>">
+                                    </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Second Image</label>
+                                        <input class="form-control" type="file"  name="images">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-4">
+                                        <div class="product-image">
+                                            <img class="img-fluid" src="../product-images/<%= product.images[2] %>" alt="<%= product.name %>">
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Third Image</label>
+                                        <input class="form-control" type="file" name="images" onchange="viewImage1(event),viewImage(event, 1)" >
+                                    </div>
+                                </div> <!-- col.// -->
+                            </div> <!-- .row end// -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <input type="hidden" value="<%=product._id%>" name="id" >
+        </form>
+        <p><%=(typeof message!=='undefined')?message:""%></p>
+
+        </section> <!-- content-main end// -->
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                    document.write(new Date().getFullYear())
+                    </script> ©, Evara - HTML Ecommerce Template .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">
+                        All rights reserved
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="../admin-assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="../admin-assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="../admin-assets/js/vendors/select2.min.js"></script>
+    <script src="../admin-assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="../admin-assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <!-- Main Script -->
+    <script src="../admin-assets/js/main.js" type="text/javascript"></script>
+</body>
+<script>
+
+</script>
+<script>
+
+    
+    	const myForm = document.getElementById("myForm")
+
+
+const name = document.getElementById("name")
+const description = document.getElementById("description")
+const price = document.getElementById("price")
+const stock = document.getElementById("stock")
+
+
+const nameError = document.getElementById("nameError")
+const descriptionError = document.getElementById("descriptionError")
+const priceError = document.getElementById("priceError")
+const stockError = document.getElementById("stockError")
+
+function nameValidation(){
+    // console.log("namevalidation check:"+name.value);
+const nameValue = name.value
+    if(nameValue.trim()==0){
+        nameError.innerHTML = 'Product title is required'
+        nameError.style.color = 'red'
+        name.style.border = "solid 2px red";
+        return false;
+    }
+nameError.innerHTML = ""
+    nameError.style.color = "green"
+    name.style.border = "solid 2px green";
+    return true
+
+
+
+}
+
+
+function descriptionValidation(){
+const descriptionValue = description.value
+    if(descriptionValue.trim()==0){
+        descriptionError.innerHTML = 'Descripion is required'
+        descriptionError.style.color = 'red'
+        description.style.border = "solid 2px red";
+        return false;
+    }
+descriptionError.innerHTML = ""
+    descriptionError.style.color = "green"
+    description.style.border = "solid 2px green";
+    return true
+
+
+
+}
+
+function priceValidation(){
+const priceValue = price.value
+    if(priceValue.trim()==0){
+        priceError.innerHTML = 'Price is Required'
+        priceError.style.color = 'red'
+        price.style.border = "solid 2px red";
+        return false;
+    }
+if(priceValue <= 0 ){
+        priceError.innerHTML = 'Price Must be greater than zero'
+        priceError.style.color = 'red'
+        price.style.border = "solid 2px red";
+        return false;
+    }
+priceError.innerHTML = ""
+    priceError.style.color = "green"
+    price.style.border = "solid 2px green";
+    return true
+
+}
+
+
+function stockValidation(){
+const stockValue = stock.value
+    if(stockValue.trim()==0){
+        stockError.innerHTML = 'Stock is Required'
+        stockError.style.color = 'red'
+        stock.style.border = "solid 2px red";
+        return false;
+    }
+if(stockValue <  0 ){
+        stockError.innerHTML = 'Stock Must be greater than or equal to zero'
+        stockError.style.color = 'red'
+        stock.style.border = "solid 2px red";
+        return false;
+    }
+stockError.innerHTML = ""
+    stockError.style.color = "green"
+    stock.style.border = "solid 2px green";
+    return true
+
+}
+
+
+
+
+
+myForm.addEventListener("submit",(event)=>{
+    event.preventDefault();
+    if(!nameValidation() || !descriptionValidation() || ! priceValidation()) {
+        return false
+    }else{
+        myForm.submit()
+    }
+
+})
+</script>
+
+<!-- Mirrored from wp.alithemes.com/html/evara/evara-backend/page-form-product-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 01 Aug 2021 15:33:32 GMT -->
+</html>
