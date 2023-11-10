@@ -2,13 +2,11 @@ const wishListHelper = require('../helpers/wishlistHelper')
 
 const getWishList = async (req, res) => {
     let user = res.locals.user;
-    // let count = await cartHelper.getCartCount(user._id);
     const wishlistCount = await wishListHelper.getWishListCount(user._id);
     wishListHelper.getWishListProducts(user._id).then((wishlistProducts) => {
 
-      res.render("wishList", {
+      res.render("wishlist", {
         user,
-        // count,
         wishlistProducts,
         wishlistCount,
       });
