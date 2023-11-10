@@ -76,7 +76,7 @@ userRoute.delete("/delete-product-cart",cartController.deleteProduct);
 
 //wishlist
 userRoute.post('/add-to-wishlist',wishlistController.addWishList)
-userRoute.get('/wishlist',validate.requireAuth,block.checkBlocked,wishlistController.getWishList)
+userRoute.get('/wishList',validate.requireAuth,block.checkBlocked,wishlistController.getWishList)
 userRoute.delete('/remove-product-wishlist',wishlistController.removeProductWishlist)
 
 userRoute.post('/changeDefaultAddress',orderController.changePrimary)
