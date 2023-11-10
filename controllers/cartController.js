@@ -53,7 +53,7 @@ const loadCart = async (req, res) => {
           }
         }
       ]);
-       console.log("CartLoad",cart);
+      
       res.render("cart", { cart, user, count, cartTotal });
     } else {
       res.render("cart", { user, count, cartTotal, cart: [] });

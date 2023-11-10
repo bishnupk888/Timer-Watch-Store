@@ -254,6 +254,7 @@ const blockUser = async(req,res)=>{
   try {
     const id = req.body.userId
     await User.findByIdAndUpdate({_id:id},{$set:{is_blocked:true}})
+    res.cookie('jwt', '', { TOKEN_EXPIRE: 1 })
     res.send({status:true})
   } catch (error) {
     

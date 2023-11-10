@@ -28,7 +28,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
-  </head>
+  <style>
+    .typography img {
+        filter: grayscale(100%); /* Converts the image to black and white */
+        opacity: 60%;
+    }
+</style>
+</head>
   
   <body>
   
@@ -97,7 +103,8 @@
                 <div style="display: flex; justify-content: center;">
                   <div class="col-md-lg-5">
                       <div class="typography" style="text-align: center;">
-                          <img style="width: 295px;" src="../images/wish.jpg" alt="">
+                          <img style="width: 295px;" src="../images/wish.png" alt="">
+                          <br><br>
                           <h3>Oops! Your Wish List is empty</h3>
                       </div>
                   </div>
@@ -165,21 +172,7 @@
                           </div>
                       </div>
                   </div>
-                  <div class="col-lg-3  col-md-6 col-sm-6">
-                      <div class="single-footer-widget mail-chimp">
-                          <h6 class="mb-20">Instragram Feed</h6>
-                          <ul class="instafeed d-flex flex-wrap">
-                              <li><img src="img/i1.jpg" alt=""></li>
-                              <li><img src="img/i2.jpg" alt=""></li>
-                              <li><img src="img/i3.jpg" alt=""></li>
-                              <li><img src="img/i4.jpg" alt=""></li>
-                              <li><img src="img/i5.jpg" alt=""></li>
-                              <li><img src="img/i6.jpg" alt=""></li>
-                              <li><img src="img/i7.jpg" alt=""></li>
-                              <li><img src="img/i8.jpg" alt=""></li>
-                          </ul>
-                      </div>
-                  </div>
+                  
                   <div class="col-lg-2 col-md-6 col-sm-6">
                       <div class="single-footer-widget">
                           <h6>Follow Us</h6>

@@ -6,8 +6,7 @@ function checkOrderInProgress(req, res, next) {
     if (isCreatingOrder) {
       return res.status(403).json({ message: 'An order is already being created.' });
     }
-  
-    
+      
     next();
   }
   

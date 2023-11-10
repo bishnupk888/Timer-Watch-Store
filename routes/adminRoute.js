@@ -4,8 +4,9 @@ const adminController = require('../controllers/adminController')
 const categoryController = require('../controllers/categoryController')
 const productController = require('../controllers/productController')
 const couponController = require('../controllers/couponController')
-
+const offerController = require('../controllers/offerController')
 const validate = require('../middleware/adminAuth');
+const bannerController = require('../controllers/bannerController')
 
 
 const cookieparser = require('cookie-parser')
@@ -84,7 +85,30 @@ adminRoute.get('/generate-coupon-code',validate.requireAuth,couponController.gen
 adminRoute.get('/couponList',validate.requireAuth,couponController.couponList)
 adminRoute.delete('/removeCoupon',couponController.removeCoupon)
 
+// categoryOffer
+adminRoute.get('/categoryOfferList',offerController.categoryOfferList)
+adminRoute.get("/addCategoryOffer",offerController.loadCreateCategoryOffer)
+adminRoute.post('/addCategoryOffer',offerController.createCategoryOffer)
+adminRoute.get('/editCategoryOffer',offerController.loadEditCategoryOffer)
+adminRoute.post('/editCategoryOffer',offerController.editCategoryOffer)
+adminRoute.delete('/deleteCategoryOffer',offerController.deleteCategoryOffer)
 
+
+// banner
+adminRoute.get('/addBanner',validate.requireAuth,bannerController.addBannerGet)
+adminRoute.post('/addBanner',multer.addBannerupload,bannerController.addBannerPost)
+adminRoute.get('/bannerList',validate.requireAuth,bannerController.bannerList)
+
+adminRoute.get('/deleteBanner',bannerController.deleteBanner)
+// productOffer
+//Product Offer
+adminRoute.get("/addProductOffer",offerController.loadAddProductOffer)
+adminRoute.post('/addProductOffer',offerController.addProductOffer)
+adminRoute.get("/productOfferList",offerController.productOfferList)
+adminRoute.get('/productOfferListPaginate',offerController.productPagination)
+adminRoute.get('/editProductOffer',offerController.loadEditProductOffer)
+adminRoute.post('/editProductOffer',offerController.editProductOffer)
+adminRoute.delete('/deleteProductOffer',offerController.deleteProductOffer)
 //salesreport
 
 adminRoute.get('/salesReport',validate.requireAuth,adminController.getSalesReport)

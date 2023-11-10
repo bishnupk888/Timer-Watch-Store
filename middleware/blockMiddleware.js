@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
+const { Message } = require('twilio/lib/twiml/MessagingResponse');
 
 require('dotenv').config();
 
@@ -11,7 +12,7 @@ const checkBlocked =  (req,res,next)=> {
           const user = await User.findById(decodedToken.id);
           if (user.is_blocked==true){
             res.clearCookie('jwt')
-            res.redirect('/error-403')
+            res.redirect('/login',)
         }else{
             next()
         }

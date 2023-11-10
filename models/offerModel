@@ -1,0 +1,48 @@
+const mongoose = require('mongoose');
+
+const categoryOfferSchema = new mongoose.Schema({
+  categoryName:{
+    type:String
+  },
+  description:{
+    type:String
+  },
+  discountPercentage:{
+    type:Number,
+  },
+  validity: {
+    type: Date,
+    default: new Date(),
+  },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  }
+});
+
+const productOfferSchema = new mongoose.Schema({
+  productName:{
+    type:String
+  },
+  description:{
+    type:String
+  },
+  discountPercentage:{
+    type:Number,
+  },
+  validity: {
+    type: Date,
+    default: new Date(),
+  },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  }
+});
+
+// Create models based on the schemas
+const CategoryOffer = mongoose.model('CategoryOffer', categoryOfferSchema);
+const ProductOffer = mongoose.model('ProductOffer', productOfferSchema);
+
+module.exports = { CategoryOffer, ProductOffer };
+

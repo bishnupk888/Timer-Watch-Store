@@ -1,0 +1,178 @@
+
+<!-- add category  -->
+
+<%- include('../layouts/adminHeader.ejs') %>
+<script>
+    $(function(){
+    var dtToday = new Date();
+    
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    
+    var maxDate = year + '-' + month + '-' + day;
+
+    // or instead:
+    // var maxDate = dtToday.toISOString().substr(0, 10);
+
+    
+    $('#txtDate').attr('min', maxDate);
+});
+</script>
+    <style>
+        .button-spacing {
+            margin-right: 10px;
+            /* Adjust this value to increase or decrease space */
+        }
+    </style>
+<body>
+    <%- include('../layouts/adminNav.ejs') %>	
+
+    <main class="main-wrap">
+        <header class="main-header navbar">
+           
+            
+        </header>
+        <section class="content-main">
+            <div class="content-header">
+                <div>
+                    <h2 class="content-title card-title">Catregory Offer </h2>
+                    <p>Add New Category Offer</p>
+                </div>
+                
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form method="post" action="/admin/addCategoryOffer">
+                                <div class="mb-3">
+                                    <label class="form-label">Category Name</label>
+                                    <select class="form-select" name="categoryId">
+                                        <option value="" selected disabled>Choose Category</option>
+                                        <% category.forEach(function(category){ %>
+                                        <option value="<%= category._id %>"><%= category.name %></option>
+                                        <% }); %>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Validity</label>
+                                    <input  type="date" id="txtDate" class="form-control custom-input" name="validity"  cols="45" rows="5">
+                                    <p class="text-danger"></p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label"> Discount Percentage</label>
+                                    <input name="discountPercentage" type="number" class="form-control" onkeyup="discountValidator()" />
+                                    <p id="error" class="text-danger"></p>
+                                </div>
+                                <div class="d-grid">
+                                    <button class="btn btn-primary">Create Category Offer</button>
+                                </div>
+                            </form>
+                            <p style="color: red;"><%=(typeof message!=='undefined')?message:""%></p>
+
+                        </div>
+                     <!-- .col// -->
+                    </div> <!-- .row // -->
+                </div> <!-- card body .// -->
+            </div> <!-- card .// -->
+        </section> <!-- content-main end// -->
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                    document.write(new Date().getFullYear())
+                    </script> ©, Evara - HTML Ecommerce Template .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">
+                        All rights reserved
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        
+    
+            
+        function discountValidator() {
+            const discountPercentage = document.querySelector('[name="discountPercentage"]');
+            const discountPercentageValue = discountPercentage.value.trim();
+            const error = discountPercentage.parentElement.querySelector('p');
+
+            error.innerText = '';
+
+            if (discountPercentageValue === '') {
+                error.innerHTML = 'Discount percentage is required';
+                error.style.color = 'red';
+                discountPercentage.style.border = "solid 2px red";
+                return false;
+            }
+            if (discountPercentageValue <= 0 || discountPercentageValue >= 99) {
+                error.innerHTML = 'Discount percentage should be between 1 and 99';
+                error.style.color = 'red';
+                discountPercentage.style.border = "solid 2px red";
+                return false;
+            }
+            error.innerHTML = "";
+            error.style.color = "green";
+            discountPercentage.style.border = "solid 2px green";
+            return true;
+        }
+
+        document.getElementById("categoryOfferForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            categorysubmit();
+        });
+
+        function categorysubmit() {
+            let formData = {
+                categoryId: document.querySelector('[name="categoryId"]').value,
+                validity: document.querySelector('[name="validity"]').value,
+                discountPercentage: document.querySelector('[name="discountPercentage"]').value
+            };
+
+            $.ajax({
+                url: '/admin/addCategoryOffer',
+                method: 'POST',
+                data: formData,
+
+                success: function(response) {
+                    console.log(response);
+                    if(response.status =='true'){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Offer Added Successfully!',
+                            timer: 2000
+                        }).then(() => {
+                            location.href = '/admin/categoryOfferList';
+                        });
+                    }else if(response.status =='false'){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Offer already exists!',
+                            timer: 5000
+                        }).then(()=>{
+                            location.href = location.href
+                        })
+                    }
+                    }, 
+                    error: function(error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Offer already exists!',
+                            timer: 5000
+                        });
+                    }
+                });
+        }
+    </script>
+    <%- include('../layouts/adminFooter.ejs') %>

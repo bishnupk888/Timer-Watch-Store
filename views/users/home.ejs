@@ -29,7 +29,35 @@
     <link rel="stylesheet" href="../user-assets/css/magnific-popup.css">
     <link rel="stylesheet" href="../user-assets/css/main.css">
 
-   
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const successMessage = getCookie('successMessage');
+    
+            if (successMessage === 'true') {
+                Toastify({
+                    text: "Successfully signed in!",
+                    duration: 3000, // Duration in milliseconds
+                    newWindow: true,
+                    close: true,
+                    gravity: "top", // Position: top, bottom, left, right
+                    position: "right", // Position: top, bottom, left, right
+                    backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                    stopOnFocus: true, // Prevents dismissing toast on focus
+                }).showToast();
+    
+                // Clear the success message cookie
+                document.cookie = "successMessage=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            }
+        });
+    
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+    </script>
 </head>
 <style>
     /* Define the hover effect for the product div */
@@ -38,19 +66,23 @@
   cursor: pointer; /* Change the cursor to a pointer on hover */
 }
 
+
+
 </style>
 <body>
+   
 
     <!-- Start Header Area -->
     <%-
-    include('../layouts/header.ejs')
-    %>
+    include('../layouts/header.ejs')%>
+
+    
     <!-- End Header Area -->
 
     <!-- <div class="full-width-image">
         <img src="/public/" alt="Your Image" style="width: 100%; height: auto;">
     </div> -->
-
+     
     <!-- start features Area -->
     <section class="features-area section_gap">
         <div class="container">
@@ -59,7 +91,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single-features">
                         <div class="f-icon">
-                            <img src="../img/features/f-icon1.png" alt="">
+                            <img src="/user-assets/img/features/f-icon1.png" alt="">
                         </div>
                         <h6>Free Delivery</h6>
                     </div>
@@ -68,7 +100,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single-features">
                         <div class="f-icon">
-                            <img src="/public/user-assets/img/features/f-icon2.png" alt="">
+                            <img src="/user-assets/img/features/f-icon2.png" alt="">
                         </div>
                         <h6>Return Policy</h6>
                     </div>
@@ -77,7 +109,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single-features">
                         <div class="f-icon">
-                            <img src="img/features/f-icon3.png" alt="">
+                            <img src="/user-assets/img/features/f-icon3.png" alt="">
                         </div>
                         <h6>24/7 Support</h6>
                     </div>
@@ -86,7 +118,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single-features">
                         <div class="f-icon">
-                            <img src="img/features/f-icon4.png" alt="">
+                            <img src="/user-assets/img/features/f-icon4.png" alt="">
                         </div>
                         <h6>Secure Payment</h6>
                     </div>
@@ -96,14 +128,92 @@
     </section>
     <!-- end features Area -->
     
+<!-- start banner Area -->
+
+<section class="banner-area">
+    <div class="">
+        <div id="bannerSlider" class="carousel slide   align-items-center justify-content-start"
+            data-ride="carousel">
+            <div class="carousel-inner">
+                <% banner.forEach((banner, index) => { %>
+                    <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                        <div class="row align-items-center d-flex">
+                            <div class="col-lg-12">
+                                <div class="banner-img">
+                                    <a href="<%=banner.link%>">
+                                        <img class="img-fluid" src="../banner-images/<%= banner.image %>"
+                                            alt="" style="width: 100%; max-height: 600px; object-fit: cover;">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+                <div style="padding: 30px;">
+                <a class="carousel-control-prev" href="#bannerSlider" role="button" data-slide="prev"
+                style="align-items:end; margin-bottom: 10px;">
+                <img src="../user-assets/img/banner/prev.png" >
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#bannerSlider" role="button" data-slide="next"
+                style="align-items:end;margin-bottom: 10px;">
+                <img src="../user-assets/img/banner/next.png" >
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- End banner Area -->
    
+    
+     <!-- Start brand Area -->
+     
+    <section class="lattest-product-area pb-40  category-list">
+        <div class="row">
+            <% product.forEach((item) => { %>
+            <% if (item.isListed=== true) { %>    
+            <% if (item.isProductListed=== true) { %>
+            <div class="col-lg-3 col-md-6">
+                <div class="single-product">
+                    <!-- Reduce image size and center it -->
+                    <div class="product-image">
+                        <img class="img-fluid" src="../product-images/<%= item.images[0] %>" alt="<%= item.name %>">
+                    </div>
+    
+                    <div class="product-details text-center">
+                        <small><%= item.category.name %></small>
+                        <h6 title="<%= item.name %>" class="tooltip-ellipsis"><%= item.name %></h6>
+    
+                        <!-- Center-align the price section -->
+                        <div class="price">
+                            <h6><i class="fa fa-inr" aria-hidden="true"></i> <%= item.price %></h6>
+                        </div>
+    
+                        <div class="prd-bottom text-center">
+                           
+                            <a href="/productPage?id=<%= item._id %>" class="social-info">
+                                <span class="lnr lnr-move"></span>
+                                <p class="hover-text">View More</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+            <% } %>
+            <% }) %>
+        </div>
+    </section>
     <div class="container text-center ">
         <h3 style="opacity: 0.8; transition: opacity 0.1s ease-in-out; font-family: 'Poppins', sans-serif;">
             - Famous Brands We Have - 
         </h3>
     </div>
-     <!-- Start brand Area -->
-     <section class="brand-area"> 
+    <section class="brand-area"> 
         <div class="container section_gap">
             <div class="row align-items-end">
                 
@@ -136,51 +246,8 @@
             </div>
         </div>
     </section>
-    <section class="lattest-product-area pb-40 category-list">
-        <div class="row">
-            <% product.forEach((item) => { %>
-            <% if (item.isListed=== true) { %>    
-            <% if (item.isProductListed=== true) { %>
-            <div class="col-lg-3 col-md-6">
-                <div class="single-product">
-                    <!-- Reduce image size and center it -->
-                    <div class="product-image">
-                        <img class="img-fluid" src="../product-images/<%= item.images[0] %>" alt="<%= item.name %>">
-                    </div>
     
-                    <div class="product-details text-center">
-                        <small><%= item.category.name %></small>
-                        <h6 title="<%= item.name %>" class="tooltip-ellipsis"><%= item.name %></h6>
-    
-                        <!-- Center-align the price section -->
-                        <div class="price">
-                            <h6><i class="fa fa-inr" aria-hidden="true"></i> <%= item.price %></h6>
-                        </div>
-    
-                        <div class="prd-bottom text-center">
-                            <!-- <a onclick="addtocart('<%= item._id %>')" class="social-info">
-                                <span class="ti-bag"></span>
-                                <p class="hover-text">Add to Bag</p>
-                            </a>
-                            <a onclick="addToWishList('<%= item._id %>')" class="social-info">
-                                <span class="lnr lnr-heart"></span>
-                                <p class="hover-text">Wishlist</p>
-                            </a> -->
-                            <a href="/productPage?id=<%= item._id %>" class="social-info">
-                                <span class="lnr lnr-move"></span>
-                                <p class="hover-text">View More</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <% } %>
-            <% } %>
-            <% }) %>
-        </div>
-    </section>
-    
-    
+ 
     
    
 
@@ -188,6 +255,8 @@
     
 
     <!-- End brand Area -->
+
+
 
     <!-- start footer Area -->
     <%-
@@ -212,6 +281,22 @@
 
     
     <script src="../user-assets/js/main.js"></script>
+    <script>
+        // Set the interval time (in milliseconds)
+        const intervalTime = 5000; // Change this value to adjust the scrolling speed
+
+        // Get the banner slider element
+        const bannerSlider = document.querySelector('#bannerSlider');
+
+        // Function to scroll the slider
+        const scrollSlider = () => {
+            $('.carousel').carousel('next');
+        };
+
+        // Start the interval to scroll the slider
+        setInterval(scrollSlider, intervalTime);
+        
+    </script>
 </body>
 
 </html>

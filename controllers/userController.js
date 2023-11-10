@@ -1,7 +1,7 @@
 const User = require('../models/userModel')
 const Product = require('../models/productModel')
 const Category = require('../models/categoryModel')
-
+const Banner = require('../models/bannerModel')
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt')
@@ -13,7 +13,7 @@ const otpHelper = require('../helpers/otpHelper')
 
 const loginLoad = (req,res)=>{
     try {
-        // console.log(res.locals.user)
+        
         if(res.locals.user!=null){
             res.redirect('/')
         }else{
@@ -37,20 +37,24 @@ const loadRegister = async(req,res)=>{
     }
 }
 const homeLoad = async(req,res)=>{
-    try {
-      const product = await Product.find(); 
-        res.render('home',{user:res.locals.user,product})
-    } catch (error) {
-        console.log(error.message);
-        // res.redirect('/error-500')
-    }
+  try {
+      const product = await Product.find({})
+      const banner = await Banner.find({}) 
+      const category = await Category.find({ })
+      res.render("home",{user:res.locals.user,category,banner,product})
+  } catch (error) {
+      console.log(error.message);
+      res.redirect('/error-500')
+  }
 }
 
 
 const logout = (req,res) =>{//pass token
     try {
       res.cookie('jwt', '' ,{TOKEN_EXPIRE : 1})
+      
       res.redirect('/')
+
       
     } catch (error) {
       console.log(error.message);
@@ -174,7 +178,9 @@ const verifyLogin = async (req, res) => {
     } else {
       const token = result.token;
       res.cookie('jwt', token, { httpOnly: true, TOKEN_EXPIRE: TOKEN_EXPIRE * 1000 });
+      res.cookie('successMessage', 'true'); // Set the success message in a cookie
       res.redirect('/');
+      
       
     }
   };
@@ -432,5 +438,6 @@ module.exports = {
     editInfo,
     categoryPage,
     error403,
-    error404,error500
+    error404,
+    error500
 }

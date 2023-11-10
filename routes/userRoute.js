@@ -69,8 +69,8 @@ userRoute.get('/productPage',productController.productPage)
 userRoute.get('/categoryShop',userController.categoryPage)
 
 //cart
-userRoute.get('/cart',block.checkBlocked,validate.requireAuth,cartController.loadCart)
-userRoute.post('/addToCart/:id',block.checkBlocked,validate.requireAuth,cartController.addToCart)
+userRoute.get('/cart',validate.requireAuth,block.checkBlocked,cartController.loadCart)
+userRoute.post('/addToCart/:id',validate.requireAuth,block.checkBlocked,cartController.addToCart)
 userRoute.put('/change-product-quantity',cartController.updateQuantity)
 userRoute.delete("/delete-product-cart",cartController.deleteProduct);
 
@@ -81,17 +81,17 @@ userRoute.delete('/remove-product-wishlist',wishlistController.removeProductWish
 
 userRoute.post('/changeDefaultAddress',orderController.changePrimary)
 userRoute.get('/deleteAddress',profileController.deleteAddress)
-userRoute.get('/orderDetails',block.checkBlocked,validate.requireAuth,orderController.orderDetails)
+userRoute.get('/orderDetails',validate.requireAuth,block.checkBlocked,orderController.orderDetails)
 
 userRoute.put('/cancelOrder',orderController.cancelOrder) 
-userRoute.get('/profileOrderList',block.checkBlocked,validate.requireAuth,orderController.orderList)
+userRoute.get('/profileOrderList',validate.requireAuth,block.checkBlocked,orderController.orderList)
 
 userRoute.get('/wallet',profileController.walletTransaction)
 
 
 //checkout
-userRoute.get('/checkOut',block.checkBlocked,validate.requireAuth,orderController.checkOut)
-userRoute.post('/checkOut',block.checkBlocked,validate.requireAuth,orderController.postCheckOut)
+userRoute.get('/checkOut',validate.requireAuth,block.checkBlocked,orderController.checkOut)
+userRoute.post('/checkOut',validate.requireAuth,block.checkBlocked,orderController.postCheckOut)
 userRoute.post('/checkOutAddress',profileController.checkOutAddress)
 
 //coupon
@@ -108,8 +108,8 @@ userRoute.get('/thanksPage',orderController.thanksPage)
 
 
 //profile
-userRoute.get('/dashboard',block.checkBlocked,validate.requireAuth,profileController.loadDashboard)
-userRoute.get('/profileDetails',block.checkBlocked,validate.requireAuth,profileController.profile)
+userRoute.get('/dashboard',validate.requireAuth,block.checkBlocked,profileController.loadDashboard)
+userRoute.get('/profileDetails',validate.requireAuth,block.checkBlocked,profileController.profile)
 userRoute.post('/submitAddress',profileController.submitAddress)
 userRoute.post('/updateAddress',profileController.editAddress)
 userRoute.post('/editPassword',userController.editPassword)

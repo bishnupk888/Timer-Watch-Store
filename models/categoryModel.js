@@ -6,6 +6,13 @@ const categorySchema = new mongoose.Schema({
   isListed:{
     type:Boolean,
     default:true
+  },
+  discountPercentage:{
+      type:Number,
+      default:0
+  },discountValidity:{
+      type: Date,
+      default: new Date()
   }
 //   parentCategory: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
 });

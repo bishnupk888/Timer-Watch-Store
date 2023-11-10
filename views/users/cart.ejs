@@ -31,6 +31,32 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
+  <style>
+    .typography{
+      align-items: center;
+    }
+    .typography img{
+      padding-right: 50px;
+      opacity: 30%;
+    }
+    
+    .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: black; /* Initial background color */
+            color: white; /* Initial text color */
+            text-decoration: none;
+            transition: background-color 0.3s; /* Smooth transition for color change */
+        }
+
+        /* Change color on hover */
+        .btn:hover {
+          color: orange; /* Hover background color */
+        }
+    </style>
+
+  </style>
+
 </head>
 
 <body>
@@ -159,13 +185,19 @@
                         </tbody>
                     </table>
                     <%}else{%>
-                      <center>
-                        <div class="col-md-lg-5">
-                            <div class="typography">
-                                <h1>THERE ARE NO ITEMS IN CART</h1>
-                            </div>
-                        </div>
-                    </center>
+
+                    <div style="display: flex; justify-content: center;">
+                      <div class="col-md-lg-5">
+                          <div class="typography" style="text-align: center;">
+                              <img style="width: 295px;" src="../images/emptyCart.png" alt="">
+                              <br>
+                              <br>
+                              <h3>There Are No Items In Your Cart..</h3>
+                              <br>
+                              <a href="/shop" class="btn">Shop</a>
+                          </div>
+                      </div>
+                  </div>
                     <% } %>
 
                 </div>
