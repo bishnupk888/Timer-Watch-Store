@@ -3,6 +3,7 @@ const Cart = require('../models/cartModel');
 const orderHelper = require('../helpers/orderHelper')
 const Order = require('../models/orderModel');
 const { ObjectId } = require("mongodb");
+const Coupon = require('../models/couponModel')
 const couponHelper = require('../helpers/couponHelper')
 const easyinvoice = require("easyinvoice");
 const fs = require("fs");
@@ -15,6 +16,7 @@ const checkOut = async (req,res)=>{
         const user = res.locals.user
         const total = await Cart.findOne({ user: user.id });
         const address = await Address.findOne({user:user._id}).lean().exec()
+        const coupons = await Coupon.find({}).select('couponCode');
         
         
         const cart = await Cart.aggregate([
@@ -42,9 +44,9 @@ const checkOut = async (req,res)=>{
             }
           ]);
       if(address){
-        res.render('checkOut',{address:address.addresses,cart,total,user}) 
+        res.render('checkOut',{address:address.addresses,cart,total,user,coupons}) 
       }else{
-        res.render('checkOut',{address:[],cart,total,user})
+        res.render('checkOut',{address:[],cart,total,user,coupons})
       }
     } catch (error) {
         console.log(error.message)

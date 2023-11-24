@@ -214,7 +214,7 @@ const resetPasswordOtpVerify = async (req,res)  => {
         const verified = await otpHelper.verifyCode(mobile,reqOtp)
         const otpHolder = await User.find({ mobile : req.body.mobile })
         if(verified){
-            res.render('resetPassword')
+            res.redirect('/resetPassword')
         }
         else{
             res.render('forgotPasswordOtp',{message:"Your OTP was Wrong"})
@@ -239,13 +239,22 @@ const setNewPassword = async (req ,res) => {
 
     if(newpw === confpw){
 
-  
+      const spassword =await securePassword(newpw)
+        const newUser = await User.updateOne({ email:email }, { $set: { password: spassword } });
         
-
         res.redirect('/login')
     }else{
         res.render('resetPassword',{message:'Password and Confirm Password is not matching'})
     }
+}
+
+const loadResetPassWord = (req,res)=>{
+  try {
+    res.render('resetPassword')
+  } catch (error) {
+    console.error(error);
+  }
+
 }
 
 const displayProduct = async (req, res) => {
@@ -439,5 +448,6 @@ module.exports = {
     categoryPage,
     error403,
     error404,
-    error500
+    error500,
+    loadResetPassWord
 }

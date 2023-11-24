@@ -57,6 +57,9 @@ userRoute.get('/forgotPassword',userController.loadForgotPassword)
 userRoute.post('/forgotPassword',userController.resetPasswordOtpVerify)
 userRoute.post('/forgotPasswordOtp',userController.forgotPasswordOtp)
 
+// reset password
+userRoute.get('/resetPassword',userController.loadResetPassWord)
+
 //SET New password in forgot password
 
 userRoute.post('/setNewPassword',userController.setNewPassword)

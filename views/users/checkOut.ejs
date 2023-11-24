@@ -142,10 +142,27 @@
                             </ul>
                           </div>
                    
-                            <div class="coupon_area">
-                                    <input type="text" placeholder="Enter coupon code" name="couponCode" id="couponCode">
-                                    <a class="primary-btn" href="#" style="width: 100px; height: 40px; margin-top: 10px;" onclick="applyCoupon('<%=total.cartTotal%>')" >Apply</a>
+                          <div style="display: flex;">
+                            <!-- First div -->
+                            <div class="coupon_area" style="margin-right: 10px;">
+                              <input type="text" placeholder="Enter coupon code" name="couponCode" id="couponCode">
+                              <a class="primary-btn" href="#" style="width: 100px; height: 40px; margin-top: 10px;" onclick="applyCoupon('<%=total.cartTotal%>')">Apply</a>
                             </div>
+                          
+                            <!-- Second div for available coupons -->
+                            <div>
+                              <label for="couponDropdown">Available Coupons:</label>
+                              <select id="couponDropdown" onchange="updateCouponCode()">
+                                <option value="" selected disabled>Select coupon</option>
+                                <% coupons
+                                .filter(coupon => !user.coupons.includes(coupon.couponCode))
+                                .forEach(coupon => { %>
+                                  <option value="<%= coupon.couponCode %>"><%= coupon.couponCode %></option>
+                                  <!-- You can display other coupon properties if needed -->
+                                <% }); %>
+                              </select>
+                            </div>
+                          </div>
                             <span id="couponErr"></span>
                             <div class="payment_item">
                                 <div class="radion_btn">
@@ -309,7 +326,19 @@
   }
 </script>
 
+<script>
+  // Function to update couponCode field when a coupon is selected
+  function updateCouponCode() {
+    const couponDropdown = document.getElementById('couponDropdown');
+    const couponCodeInput = document.getElementById('couponCode');
 
+    // Get the selected option value
+    const selectedCouponCode = couponDropdown.value;
+
+    // Set the selected coupon code in the couponCode input field
+    couponCodeInput.value = selectedCouponCode;
+  }
+</script>
 
 
 
