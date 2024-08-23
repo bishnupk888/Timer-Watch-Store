@@ -10,10 +10,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.set('view engine','ejs')
 //Parsing
-const cookieParser = require('cookie-parser')//moved to app.js
+const cookieParser = require('cookie-parser')
 app.use(cookieParser())
-app.use(express.json()) //used in app .js
-app.use(express.urlencoded({extended:true}))// mooved to  app.j
+app.use(express.json()) 
+app.use(express.urlencoded({extended:true}))
 
 
 const userRoute = require('./routes/userRoute')

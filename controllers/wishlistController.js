@@ -42,5 +42,4 @@ const getWishList = async (req, res) => {
     addWishList,
     removeProductWishlist
 
-
   }

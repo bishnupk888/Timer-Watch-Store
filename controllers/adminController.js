@@ -178,11 +178,10 @@ const verifyLogin = async(req,res)=>{
     try {
         const username = req.body.username
         const password = req.body.password
-        
-        const adminData =await Admin.findOne({userName:username})
+        const adminData = await Admin.findOne({userName:username});
 
-
-        if(adminData.password === password){
+        if(adminData){
+          if(adminData.password === password){
             if(adminData){
                 const token = createToken(adminData._id);
                 res.cookie('jwtAdmin', token, { httpOnly: true, maxAge: maxAge * 1000 });
@@ -194,18 +193,15 @@ const verifyLogin = async(req,res)=>{
         }else{
             res.render('login',{message:"Email and Password are Incorrect"});
         }
+        }else{
+          res.render('login',{message:"Admin details not found "});
+
+        }
         
     } catch (error) {
         console.log(error.message);
     }
 }
-
-
-
-
-
-
-
 
 const loadUsers = async(req,res)=>{
   try {
@@ -214,9 +210,6 @@ const pageSize = parseInt(req.query.pageSize) || 5;
 const skip = (page - 1) * pageSize;
 const totalCount = await User.countDocuments({});
 const totalPages = Math.ceil(totalCount / pageSize);
-
-
-
 
     var search = ''
     if(req.query.search){
@@ -257,7 +250,6 @@ const blockUser = async(req,res)=>{
     res.cookie('jwt', '', { TOKEN_EXPIRE: 1 })
     res.send({status:true})
   } catch (error) {
-    
     console.log(error.message)
   }
 }
@@ -299,10 +291,6 @@ const updateUser = async(req,res)=>{
       console.log(error.message);
   }
 }
-
-
-
-
 
 
 

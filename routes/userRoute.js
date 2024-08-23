@@ -125,6 +125,7 @@ userRoute.get('/error-403',userController.error403)
 userRoute.get('/error-500',userController.error500)
 
 userRoute.get('/invoice',orderController.downloadInvoice)
+userRoute.get('*',userController.error404)
 
 
 module.exports = userRoute 

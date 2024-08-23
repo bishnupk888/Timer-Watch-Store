@@ -14,7 +14,7 @@
     <meta property="og:url" content="">
     <meta property="og:image" content="">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="../admin-assets/imgs/theme/favicon.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="../images/logo.png">
     <!-- Template CSS -->
     <link href="../admin-assets/css/main.css" rel="stylesheet" type="text/css" />
 </head>
@@ -24,7 +24,7 @@
         <section class="content-main mt-80 mb-80">
             <div class="card mx-auto card-login">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Admin Log In</h4>
+                    <h4 class="card-title mb-4">Admin sign in</h4>
                     <form action="/admin/login" method="post">
                         <div class="mb-3">
                             <input class="form-control" placeholder="Username or email" type="text" name="username">
@@ -42,16 +42,15 @@
                     </form>
                  
                     <p class="text-center mb-4">Don't have account? <a href="#">Sign up</a></p>
+                    <h6 style="color: red;">Credentials:</h6>
+                    <p style="color: red;">username : admin</p>
+                    <p style="color: red;">password : admin@123</p>
+
                 </div>
             </div>
         </section>
         <footer class="main-footer text-center">
-            <p class="font-xs">
-                <script>
-                document.write(new Date().getFullYear())
-                </script> ©, Evara - HTML Ecommerce Template .
-            </p>
-            <p class="font-xs mb-30">All rights reserved</p>
+            
         </footer>
     </main>
     <script src="../admin-assets/js/vendors/jquery-3.6.0.min.js"></script>
