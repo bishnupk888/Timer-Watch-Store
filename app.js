@@ -23,6 +23,6 @@ const adminRoute = require('./routes/adminRoute')
 app.use('/admin',adminRoute)
 
 
-app.listen(3000,()=>{
-    console.log("server running..")
+app.listen(process.env.PORT,()=>{
+    console.log(`server running on port :${process.env.PORT}`)
 })
