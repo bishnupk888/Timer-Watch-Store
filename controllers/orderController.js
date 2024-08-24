@@ -5,7 +5,7 @@ const Order = require('../models/orderModel');
 const { ObjectId } = require("mongodb");
 const Coupon = require('../models/couponModel')
 const couponHelper = require('../helpers/couponHelper')
-const easyinvoice = require('easyinvoice');
+// const easyinvoice = require('easyinvoice');
 const fs = require("fs");
 const { Readable } = require('stream');
 const path=require('path')
@@ -228,6 +228,7 @@ const verifyPayment =  (req, res) => {
 
 const downloadInvoice = async (req, res) => {
   try {
+    const { default: easyinvoice } = await import('easyinvoice');
     const id = req.query.id
     userId = res.locals.user._id;
 
