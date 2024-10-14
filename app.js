@@ -16,11 +16,11 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 
-const userRoute = require('./routes/userRoute')
-app.use('/',userRoute)
-
 const adminRoute = require('./routes/adminRoute')
 app.use('/admin',adminRoute)
+
+const userRoute = require('./routes/userRoute')
+app.use('/',userRoute)
 
 
 app.listen(process.env.PORT,()=>{
