@@ -9,6 +9,7 @@ const Razorpay = require("razorpay");
 require('dotenv').config();
 
 
+
 var instance = new Razorpay({
   
   key_id: process.env.RAZORPAY_ID,
@@ -17,7 +18,7 @@ var instance = new Razorpay({
 
 const placeOrder = (data,user)=>{
     try {
-      // console.log("entered placeorder");
+      
         return new Promise(async (resolve, reject) => {
             const productDetails = await Cart.aggregate([
               {

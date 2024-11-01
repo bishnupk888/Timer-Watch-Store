@@ -38,16 +38,16 @@
             if (successMessage === 'true') {
                 Toastify({
                     text: "Successfully signed in!",
-                    duration: 3000, // Duration in milliseconds
+                    duration: 3000, 
                     newWindow: true,
                     close: true,
-                    gravity: "top", // Position: top, bottom, left, right
-                    position: "right", // Position: top, bottom, left, right
+                    gravity: "top", 
+                    position: "right", 
                     backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
-                    stopOnFocus: true, // Prevents dismissing toast on focus
+                    stopOnFocus: true, 
                 }).showToast();
     
-                // Clear the success message cookie
+                
                 document.cookie = "successMessage=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             }
         });
@@ -177,32 +177,32 @@
             <% product.forEach((item) => { %>
             <% if (item.isListed=== true) { %>    
             <% if (item.isProductListed=== true) { %>
-            <div class="col-lg-3 col-md-6">
-                <div class="single-product">
-                    <!-- Reduce image size and center it -->
-                    <div class="product-image">
-                        <img class="img-fluid" src="../product-images/<%= item.images[0] %>" alt="<%= item.name %>">
-                    </div>
-    
-                    <div class="product-details text-center">
-                        <small><%= item.category.name %></small>
-                        <h6 title="<%= item.name %>" class="tooltip-ellipsis"><%= item.name %></h6>
-    
-                        <!-- Center-align the price section -->
-                        <div class="price">
-                            <h6><i class="fa fa-inr" aria-hidden="true"></i> <%= item.price %></h6>
+                <div class="col-lg-3 col-md-6">
+                    <a href="/productPage?id=<%= item._id %>" style="text-decoration: none; color: inherit; ">
+                        <div class="single-product">
+                            <!-- Reduce image size and center it -->
+                            <div class="product-image">
+                                <img class="img-fluid" src="../product-images/<%= item.images[0] %>" alt="<%= item.name %>">
+                            </div>
+                
+                            <div class="product-details text-center">
+                                <small><%= item.category.name %></small>
+                                <h6 title="<%= item.name %>" class="tooltip-ellipsis"><%= item.name %></h6>
+                
+                                <!-- Center-align the price section -->
+                                <div class="price">
+                                    <h6><i class="fa fa-inr" aria-hidden="true"></i> <%= item.price %></h6>
+                                </div>
+                
+                                <div class="prd-bottom text-center">
+                                    <span class="lnr lnr-move"></span>
+                                    <p class="hover-text">View More</p>
+                                </div>
+                            </div>
                         </div>
-    
-                        <div class="prd-bottom text-center">
-                           
-                            <a href="/productPage?id=<%= item._id %>" class="social-info">
-                                <span class="lnr lnr-move"></span>
-                                <p class="hover-text">View More</p>
-                            </a>
-                        </div>
-                    </div>
+                    </a>
                 </div>
-            </div>
+                
             <% } %>
             <% } %>
             <% }) %>
